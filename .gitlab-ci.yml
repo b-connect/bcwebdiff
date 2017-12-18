@@ -23,6 +23,7 @@ sonarqube_preview:
     SONAR_PROJECT_VERSION: "$CI_BUILD_ID"
     SONAR_ANALYSIS_MODE: "issues"
     SONAR_PROJECT_KEY: "erik.seifert/bcwebdiff"
+    SONAR_SOURCES: "src"
   script:
     - /usr/bin/sonar-scanner-run.sh
   stage: sonarqube
