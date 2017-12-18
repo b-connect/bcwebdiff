@@ -7,7 +7,6 @@ build_linux:
   artifacts:
     paths:
     - app-builds/*.deb
-    - app-builds/*.AppImage
   script:
     - npm i
     - npm run electron:linux

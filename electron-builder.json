@@ -23,7 +23,6 @@
     },
     "category": "Development",
     "target": [
-      "AppImage",
       "deb"
     ]
   }
