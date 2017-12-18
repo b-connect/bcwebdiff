@@ -26,6 +26,7 @@ sonarqube_preview:
     SONAR_SOURCES: "src"
     SONAR_PROJECT_VERSION: $CI_BUILD_ID
     SONAR_GITLAB_PROJECT_ID: $CI_PROJECT_ID
+    SONAR_DEBUG: true
   script:
     - /usr/bin/sonar-scanner-run.sh
   stage: sonarqube
