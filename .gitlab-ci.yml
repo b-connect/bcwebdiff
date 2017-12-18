@@ -17,7 +17,7 @@ build_linux:
     # - npm run electron:mac
 
 sonarqube:
-  stage: analysis
+  stage: sonarqube
   image: ciricihq/gitlab-sonar-scanner
   variables:
     SONAR_URL: "http://your-gocd-server:9000"
