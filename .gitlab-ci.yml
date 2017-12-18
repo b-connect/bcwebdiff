@@ -16,18 +16,13 @@ build_linux:
     - tags
     # - npm run electron:mac
 
-sonarqube:
-  stage: sonarqube
+sonarqube_preview:
   image: ciricihq/gitlab-sonar-scanner
   variables:
     SONAR_URL: "https://sonar.dev.b-connect.de"
     SONAR_PROJECT_VERSION: "$CI_BUILD_ID"
     SONAR_ANALYSIS_MODE: "issues"
+    SONAR_PROJECT_KEY: "erik.seifert/bcwebdiff"
   script:
     - /usr/bin/sonar-scanner-run.sh
-# build_windows:
-#   stage: build
-#   image: electronuserland/builder:wine
-#   script:
-#     - npm i
-#     - npm run electron:windows
+  stage: sonarqube
