@@ -1,0 +1,97 @@
+<div class="content" fxLayout="row" >
+  <div fxFlex="20" class="outer">
+    <mat-form-field>
+      <input matInput placeholder="Source URL" [(ngModel)]="options.source.url">
+    </mat-form-field>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Options
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="User" [(ngModel)]="options.source.user">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Pass" [(ngModel)]="options.source.pass">
+        </mat-form-field>
+      </p>
+    </mat-expansion-panel>
+    <hr />
+    <mat-form-field>
+      <input matInput placeholder="Target URL" [(ngModel)]="options.target.url">
+    </mat-form-field>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Options
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="User" [(ngModel)]="options.target.user">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Pass" [(ngModel)]="options.target.pass">
+        </mat-form-field>
+      </p>
+    </mat-expansion-panel>
+    <p>
+      <mat-checkbox placeholder="Fullscreen" [(ngModel)]="fullPage">Fullscreen</mat-checkbox>
+    </p>
+    <p>
+      <mat-form-field>
+        <input matInput placeholder="Viewport height" [(ngModel)]="browserOptions.viewport.height">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Viewport width" [(ngModel)]="browserOptions.viewport.width">
+      </mat-form-field>
+    </p>
+
+    <mat-form-field>
+      <input  matInput placeholder="Timeout" [(ngModel)]="slowMo">
+    </mat-form-field>
+    <p>
+      <button [disabled]="status == 4" (click)="submit()" mat-raised-button>Generate screens</button>
+    </p>
+  </div>
+  <div fxFlex="80">
+      <div class="content" fxLayout="row" fxFlexFill>
+        <div fxFlex="20" class="sec2" >
+          <div [hidden]="status !== 2 && status !== 4" class="outer">
+            <mat-card>
+              <mat-card-title>Target</mat-card-title>
+              <a class="preview" (click)="setSource('target')">
+                <img [src]="imgs.target" />
+              </a>
+            </mat-card>
+          </div>
+          <div [hidden]="status !== 2 && status !== 4" class="outer">
+            <mat-card>
+              <mat-card-title>Source</mat-card-title>
+              <a class="preview" (click)="setSource('source')">
+                <img [src]="imgs.source" />
+              </a>
+            </mat-card>
+          </div>
+          <div [hidden]="status !== 2 && status !== 4" class="outer">
+            <mat-card>
+              <mat-card-title>Diff</mat-card-title>
+              <a class="preview" (click)="setSource('diff')">
+                <img [src]="imgs.diff" />
+              </a>
+            </mat-card>
+          </div>
+        </div>
+        <div fxFlex="60" class="sec2" class="outer">
+          <div [hidden]="status !== 2 && status !== 4">
+            <mat-card>
+              <mat-card-title [hidden]="!result || !result.misMatchPercentage">{{ result.misMatchPercentage }}</mat-card-title>
+              <img [src]="imgs.preview" />
+            </mat-card>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+{
+  "productName": "angular-electron",
+  "directories": {
+    "app": "dist",
+    "output": "app-builds"
+  },
+  "win": {
+    "icon": "dist/favicon",
+    "target": [
+      "portable"
+    ]
+  },
+  "mac": {
+    "icon": "dist/favicon",
+    "target": [
+      "dmg"
+    ]
+  },
+  "linux": {
+    "icon": "dist/assets/icons",
+    "desktop": {
+      "Name": "Website DIFF"
+    },
+    "category": "Development",
+    "target": [
+      "AppImage",
+      "deb"
+    ]
+  }
+}

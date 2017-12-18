@@ -1,0 +1,24 @@
+stages:
+  - build
+
+build_linux:
+  stage: build
+  image: electronuserland/builder
+  artifacts:
+    paths:
+    - app-builds/*.deb
+    - app-builds/*.AppImage
+  script:
+    - npm i
+    - npm run electron:linux
+    - npm run clean
+  only:
+    - tags
+    # - npm run electron:mac
+
+# build_windows:
+#   stage: build
+#   image: electronuserland/builder:wine
+#   script:
+#     - npm i
+#     - npm run electron:windows
