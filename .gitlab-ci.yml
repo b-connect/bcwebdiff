@@ -22,8 +22,10 @@ sonarqube_preview:
     SONAR_URL: "https://sonar.dev.b-connect.de"
     SONAR_PROJECT_VERSION: "$CI_BUILD_ID"
     SONAR_ANALYSIS_MODE: "issues"
-    SONAR_PROJECT_KEY: "erik.seifert/bcwebdiff"
+    SONAR_PROJECT_KEY: $CI_PROJECT_NAME
     SONAR_SOURCES: "src"
+    SONAR_PROJECT_VERSION: $CI_BUILD_ID
+    SONAR_GITLAB_PROJECT_ID: $CI_PROJECT_ID
   script:
     - /usr/bin/sonar-scanner-run.sh
   stage: sonarqube
