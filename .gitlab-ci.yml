@@ -1,4 +1,5 @@
 stages:
+  - sonarqube
   - build
 
 build_linux:
@@ -15,6 +16,15 @@ build_linux:
     - tags
     # - npm run electron:mac
 
+sonarqube:
+  stage: analysis
+  image: ciricihq/gitlab-sonar-scanner
+  variables:
+    SONAR_URL: "http://your-gocd-server:9000"
+    SONAR_PROJECT_VERSION: "$CI_BUILD_ID"
+    SONAR_ANALYSIS_MODE: "issues"
+  script:
+  - /usr/bin/sonar-scanner-run.sh
 # build_windows:
 #   stage: build
 #   image: electronuserland/builder:wine

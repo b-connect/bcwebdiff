@@ -1,5 +1,6 @@
 {
-  "productName": "angular-electron",
+  "productName": "bcwebdiff",
+  "buildVersion": "latest",
   "directories": {
     "app": "dist",
     "output": "app-builds"
