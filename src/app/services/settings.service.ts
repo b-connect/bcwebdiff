@@ -12,6 +12,9 @@ export class SettingsService {
       storage.has(key, (error, hasKey) => {
         if (hasKey) {
           storage.get(key, (error, content) => {
+            if (error) {
+              return reject(error);
+            }
             return resolve(content);
           })
         } else {

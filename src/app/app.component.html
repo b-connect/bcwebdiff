@@ -1,15 +1,14 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Auto-resizing sidenav</p>
-    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
-    <button (click)="showFiller = !showFiller" mat-raised-button>
-      Toggle extra text
-    </button>
+    <mat-nav-list>
+      <mat-list-item  [routerLinkActive]="['active']" [routerLink]="['/']"> Start Diff </mat-list-item>
+     <mat-list-item  routerLink="/history"> History </mat-list-item>
+    </mat-nav-list>
   </mat-drawer>
 
   <div class="example-sidenav-content">
     <mat-toolbar>
-      <button type="button" mat-button (click)="drawer.toggle()">Nav</button><span>My Application</span>
+      <button type="button" mat-icon-button (click)="drawer.toggle()"><mat-icon>menu</mat-icon></button><span>Web DIFF</span>
     </mat-toolbar>
 
     <router-outlet></router-outlet>

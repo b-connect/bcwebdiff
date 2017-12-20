@@ -9,3 +9,11 @@ router-outlet {
 .example-container {
   height: 100%;
 }
+
+mat-nav-list {
+  width: 200px;
+}
+
+[ng-reflect-router-link-active="active"] {
+  font-weight: bold;
+}

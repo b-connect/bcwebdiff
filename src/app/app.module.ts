@@ -40,9 +40,11 @@ import {
   MatExpansionModule,
   MatCheckboxModule,
   MatDialogModule,
+  MatListModule,
   MatSidenavModule
 } from '@angular/material';
 import {MATERIAL_SANITY_CHECKS} from '@angular/material/core';
+import { HistoryComponent } from './components/history/history.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -53,7 +55,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     HomeComponent,
-    ErrorDialog
+    ErrorDialog,
+    HistoryComponent
   ],
   entryComponents: [
     ErrorDialog
@@ -75,6 +78,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatExpansionModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatListModule,
     MatSidenavModule,
     TranslateModule.forRoot({
       loader: {

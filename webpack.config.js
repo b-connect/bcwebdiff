@@ -250,6 +250,7 @@ module.exports = {
     "path": "require('path')",
     "md5": "require('md5')",
     "url": "require('url')",
+    "jimp": "require('jimp')",
     "util": "require('util')",
     "ba64": "require('ba64')",
     "storage" : "require('electron-json-storage')",

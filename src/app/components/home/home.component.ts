@@ -93,6 +93,7 @@ export class HomeComponent implements OnInit {
         if (settings.source) {
           this.options.source = settings.source;
         }
+      }).catch((e) => {
       })
 
   }
@@ -128,6 +129,7 @@ export class HomeComponent implements OnInit {
           this.imgs[scope] = r;
           resolve(fileName);
         }).catch((e) => {
+          console.error('Error on makeScreenshot', e);
           reject(e);
         })
     })
@@ -166,6 +168,7 @@ export class HomeComponent implements OnInit {
     this.makeScreens()
       .catch((e) => {
         // console.log('Error');
+        console.error('Error on submit:makeScreens');
       })
       .then((values) => {
         return this.diffService.diffResembleJs(this.options['source'].url, values[0], values[1], this.diffOptions);
@@ -175,15 +178,15 @@ export class HomeComponent implements OnInit {
       }).then((content:string) => {
         this.imgs.diff = this.imgs.preview = content;
         this.status = State.STATUS_READY;
-        this.history.addEntry(this.options.source, this.options.source, this.browserOptions, {})
+        let img = this.diffService.getPathForFile(this.options.source.url, 'source');
+        this.history.addEntry(img, this.options.source, this.options.source, this.browserOptions, {})
           .then(() => {
 
+          }).catch((e) => {
+              console.error('Error on submit:history', e);
           })
       }).catch((e) => {
-        if (e) {
-
-        }
-
+        console.error('Error on submit:makeScreens');
         this.status = State.STATUS_ERROR;
       })
 

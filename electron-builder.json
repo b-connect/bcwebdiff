@@ -1,6 +1,7 @@
 {
   "productName": "bcwebdiff",
   "buildVersion": "latest",
+  "asar": false,
   "directories": {
     "app": "dist",
     "output": "app-builds"
@@ -24,7 +25,7 @@
     },
     "category": "Development",
     "target": [
-      "deb"
+      "AppImage"
     ]
   }
 }

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 
-var puppeteer = window.require('puppeteer');
+const puppeteer = window.require('puppeteer');
+const fs = require('fs-extra-promise');
+
+const app = window.require('electron').remote.app;
 
 @Injectable()
 export class PuppeterService {
@@ -11,8 +14,14 @@ export class PuppeterService {
     let promise = new Promise((resolve, reject) => {
       (async () => {
         try {
-          const browser = await puppeteer.launch({slowMo: slowMo});
+
+          const browser = await puppeteer.launch({
+            slowMo: slowMo,
+            ignoreHTTPSErrors: true
+          });
+
           const page = await browser.newPage();
+
           page.on('error', e => {
             return reject(e);
           });
@@ -46,20 +55,22 @@ export class PuppeterService {
 
           await page.goto(url, {"waitUntil" : "networkidle2"});
 
-          await page.evaluate(() => {
-              return Promise.resolve(window.scrollTo(0,document.body.scrollHeight));
-          });
+          // await page.evaluate(() => {
+          //     return Promise.resolve(window.scrollTo(0,document.body.scrollHeight));
+          // });
 
           let screenOptions = {
             path: file,
             fullPage: false
           };
 
+
           if (fullPage) {
             screenOptions.fullPage = true;
           }
 
           await page.screenshot(screenOptions);
+
           await browser.close();
 
           return resolve(file);
