@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-
+import { ActivatedRoute } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 
@@ -14,9 +14,7 @@ const storage = require('electron-json-storage');
 
 import { DataUrlService } from '../../services/data-url.service';
 import { DiffService } from '../../services/diff.service';
-
 import { SettingsService } from '../../services/settings.service';
-
 import { HistoryService } from '../../services/history.service';
 
 interface IState {
@@ -41,7 +39,6 @@ const State: IState = {
 
 export class HomeComponent implements OnInit {
   status: number = State.STATUS_OK;
-  fullPage: false;
   slowMo: number = 250;
   defaultOptionsScreen: any = {
     target: {
@@ -68,33 +65,56 @@ export class HomeComponent implements OnInit {
     viewport: {
       width: 1200,
       height: 1000
-    }
+    },
+    fullPage: true
   };
   diffOptions: any = {
     threshold: 0.01
   };
   options:any = this.defaultOptionsScreen;
   states: any = State;
+  historyId: string = null;
 
   constructor(
     public dialog: MatDialog,
     private dataUri: DataUrlService,
     private diffService: DiffService,
     private settings: SettingsService,
-    private history: HistoryService
-  ) { }
+    private history: HistoryService,
+    private route: ActivatedRoute
+  ) {
+
+    this.route.params.subscribe(res => {
+      if (res.id) {
+        this.history.getEntry(res.id)
+          .then((r:any) => {
+            console.log('Result', r);
+            if (!r) {
+              return;
+            }
+            if (r) {
+              this.options.target = r.target;
+              this.options.source = r.source;
+              this.browserOptions = r.browserOptions;
+            }
+          })
+          return;
+      }
+      this.settings.get('default')
+        .then((settings:any) => {
+          if (settings.target) {
+            this.options.target = settings.target;
+          }
+          if (settings.source) {
+            this.options.source = settings.source;
+          }
+        }).catch((e) => {
+        })
+    });
+  }
 
   ngOnInit() {
-    this.settings.get('default')
-      .then((settings:any) => {
-        if (settings.target) {
-          this.options.target = settings.target;
-        }
-        if (settings.source) {
-          this.options.source = settings.source;
-        }
-      }).catch((e) => {
-      })
+
 
   }
 
@@ -121,10 +141,12 @@ export class HomeComponent implements OnInit {
   makeScreenshot(scope) {
     let fileName;
     return new Promise((resolve, reject) => {
-      this.diffService.screenshot(scope, this.options[scope].url, this.slowMo, this.fullPage,this.options[scope], this.browserOptions)
-        .then((file) => {
-          fileName = file;
-          return this.dataUri.encode(file);
+      this.diffService.screenshot(scope, this.options[scope].url, this.slowMo,this.options[scope], this.browserOptions)
+        .then((result:any) => {
+          console.log('File', result);
+          fileName = result.file;
+          this.options[scope].title = result.title;
+          return this.dataUri.encode(result.file);
         }).then((r) => {
           this.imgs[scope] = r;
           resolve(fileName);
@@ -166,13 +188,12 @@ export class HomeComponent implements OnInit {
     this.status = State.STATUS_WORKING;
 
     this.makeScreens()
-      .catch((e) => {
-        // console.log('Error');
-        console.error('Error on submit:makeScreens');
-      })
       .then((values) => {
+        console.log(values, 'Values');
         return this.diffService.diffResembleJs(this.options['source'].url, values[0], values[1], this.diffOptions);
-      }).then((result:any) => {
+      })
+      .then((result:any) => {
+        console.log('Result:', result);
         this.result = result.result;
         return result.file;
       }).then((content:string) => {
@@ -186,7 +207,7 @@ export class HomeComponent implements OnInit {
               console.error('Error on submit:history', e);
           })
       }).catch((e) => {
-        console.error('Error on submit:makeScreens');
+        console.error('Error on submit:makeScreensLast', e);
         this.status = State.STATUS_ERROR;
       })
 

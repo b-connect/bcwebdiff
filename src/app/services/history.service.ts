@@ -13,6 +13,7 @@ export class HistoryService {
 
   addEntry(img, source, target, browserOptions, options) {
     let thumb = "";
+    const id = md5(source.url);
     return this.settings.has('history')
       .then((hasKey:boolean) => {
         if (!hasKey) {
@@ -25,8 +26,9 @@ export class HistoryService {
       .then((history:any) => {
         return new Promise((resolve, reject) => {
           jimp.read(img).then((image) => {
-            image.resize(100,100)
-              .quality(90)
+            image.resize(160,jimp.AUTO)
+              .crop(0,0,160,160)
+              .quality(100)
               .getBase64( jimp.AUTO, (err, content) => {
                 thumb = content;
                 resolve(history);
@@ -42,9 +44,10 @@ export class HistoryService {
           history= history.slice(0,50);
         }
         return new Promise((resolve, reject) => {
-          console.log(thumb);
           const item = {
             thumb: thumb,
+            id: id,
+            date: Date.now(),
             source: source,
             target: target,
             browserOptions: browserOptions,
@@ -54,10 +57,7 @@ export class HistoryService {
           resolve(history);
         })
       }).then((history:any) => {
-
         return this.settings.set('history', history);
-      }).catch((e) => {
-        console.log(e);
       })
   }
 
@@ -65,8 +65,18 @@ export class HistoryService {
     return this.settings.get('history');
   }
 
-  getEntry(source) {
-    return this.entries[md5(source.url)];
+  getEntry(id) {
+    return new Promise((resolve, reject) => {
+      this.getEntries()
+        .then((entries:any) => {
+          entries.forEach(element => {
+            if (element.id === id) {
+              return resolve(element);
+            }
+          });
+          resolve(null);
+        })
+    })
   }
 
   hasEntry(source) {

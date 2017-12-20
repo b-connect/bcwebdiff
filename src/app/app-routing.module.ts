@@ -6,12 +6,21 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
     {
-        path: '',
-        component: HomeComponent
+      path: '',
+      redirectTo: 'diff',
+      pathMatch: 'full'
     },
     {
-        path: 'history',
-        component: HistoryComponent
+      path: 'diff',
+      component: HomeComponent
+    },
+    {
+      path: 'diff/:id',
+      component: HomeComponent
+    },
+    {
+      path: 'history',
+      component: HistoryComponent
     }
 ];
 

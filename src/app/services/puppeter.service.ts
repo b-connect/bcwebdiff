@@ -10,7 +10,7 @@ export class PuppeterService {
 
   constructor() { }
 
-  public screenshot(file:string, url:string, slowMo:number, fullPage:boolean, auth:any = null, options:any = null) {
+  public screenshot(file:string, url:string, slowMo:number, auth:any = null, options:any = null) {
     let promise = new Promise((resolve, reject) => {
       (async () => {
         try {
@@ -55,6 +55,8 @@ export class PuppeterService {
 
           await page.goto(url, {"waitUntil" : "networkidle2"});
 
+          const title = await page.title();
+
           // await page.evaluate(() => {
           //     return Promise.resolve(window.scrollTo(0,document.body.scrollHeight));
           // });
@@ -65,7 +67,7 @@ export class PuppeterService {
           };
 
 
-          if (fullPage) {
+          if (options.fullPage === true) {
             screenOptions.fullPage = true;
           }
 
@@ -73,7 +75,7 @@ export class PuppeterService {
 
           await browser.close();
 
-          return resolve(file);
+          return resolve({file: file, title: title});
 
         } catch (e) {
           return reject(e);

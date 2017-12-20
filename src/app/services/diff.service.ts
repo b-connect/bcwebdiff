@@ -39,15 +39,15 @@ export class DiffService {
       });
     });
   }
-  screenshot(scope:string, url:string, slowMo:number, fullPage:boolean, auth:any = null, options:any = null) {
+  screenshot(scope:string, url:string, slowMo:number, auth:any = null, options:any = null) {
     const file = this.getPathForFile(url, scope)
     return new Promise((resolve,reject) => {
       this.ensureDataDir(url)
         .then(() => {
           console.log('Try Screenshot', file);
-          this.puppeter.screenshot(file, url, slowMo, fullPage, auth, options)
-            .then(img => {
-              resolve(img);
+          this.puppeter.screenshot(file, url, slowMo, auth, options)
+            .then((result:any) => {
+              resolve(result);
             }).catch(e => {
               console.error('Error on puppeteer:screenshot', e);
               reject(e);
@@ -64,6 +64,7 @@ export class DiffService {
     const diffFileSrcExt = this.getPathForFile(url, 'diff');
     return new Promise((resolve, reject) => {
       let diff = resemble(targetFileSrc).compareTo(sourceFileSrc).onComplete(function(data){
+        console.log(data);
         resolve({file: data.getImageDataUrl(), result: data});
       });
     })

@@ -15,6 +15,8 @@ export class HistoryComponent implements OnInit {
     this.historyService.getEntries()
       .then((history) => {
         this.items = history;
+      }).catch((e) => {
+        console.log('Error', e);
       })
   }
 

@@ -9,7 +9,11 @@ export class SettingsService {
 
   get(key) {
     return new Promise((resolve, reject) => {
+      console.log('LOADING');
       storage.has(key, (error, hasKey) => {
+        if (error) {
+          return reject(error);
+        }
         if (hasKey) {
           storage.get(key, (error, content) => {
             if (error) {
@@ -18,7 +22,8 @@ export class SettingsService {
             return resolve(content);
           })
         } else {
-          reject();
+          console.log('No key');
+          reject(null);
         }
       });
     });

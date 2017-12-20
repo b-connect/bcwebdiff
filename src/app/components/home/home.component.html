@@ -1,3 +1,7 @@
+<mat-toolbar>
+    <h2>Create a diff</h2>
+</mat-toolbar>
+
 <div class="content" fxLayout="row" >
   <div fxFlex="20" class="outer">
     <mat-form-field>
@@ -38,7 +42,7 @@
       </p>
     </mat-expansion-panel>
     <p>
-      <mat-checkbox placeholder="Fullscreen" [(ngModel)]="fullPage">Fullscreen</mat-checkbox>
+      <mat-checkbox placeholder="Fullscreen" [(ngModel)]="browserOptions.fullPage">Fullscreen</mat-checkbox>
     </p>
     <p>
       <mat-form-field>

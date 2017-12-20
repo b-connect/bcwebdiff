@@ -12,8 +12,15 @@ router-outlet {
 
 mat-nav-list {
   width: 200px;
+  span {
+    padding-left: .5em;
+  }
 }
 
-[ng-reflect-router-link-active="active"] {
+.active {
   font-weight: bold;
+}
+
+.page-title {
+  padding-left: 2em;
 }
