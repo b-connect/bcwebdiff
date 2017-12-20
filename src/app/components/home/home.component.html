@@ -2,67 +2,70 @@
     <h2>Create a diff</h2>
 </mat-toolbar>
 
-<div class="content" fxLayout="row" >
-  <div fxFlex="20" class="outer">
-    <mat-form-field>
-      <input matInput placeholder="Source URL" [(ngModel)]="options.source.url">
-    </mat-form-field>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Options
-        </mat-panel-title>
-      </mat-expansion-panel-header>
+<div class="content" fxLayout="row" fxLayoutWrap>
+  <div fxFlex="100%"  fxFlex.gt-xs="40%" fxFlex.gt-sm="33%" fxFlex.gt-md="25%" fxFlex.gt-lg="20%">
+    <div class="outer">
+      <mat-form-field>
+        <input matInput placeholder="Source URL" [(ngModel)]="options.source.url">
+      </mat-form-field>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Options
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>
+          <mat-form-field>
+            <input matInput placeholder="User" [(ngModel)]="options.source.user">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Pass" [(ngModel)]="options.source.pass">
+          </mat-form-field>
+        </p>
+      </mat-expansion-panel>
+      <hr />
+      <mat-form-field>
+        <input matInput placeholder="Target URL" [(ngModel)]="options.target.url">
+      </mat-form-field>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Options
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>
+          <mat-form-field>
+            <input matInput placeholder="User" [(ngModel)]="options.target.user">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Pass" [(ngModel)]="options.target.pass">
+          </mat-form-field>
+        </p>
+      </mat-expansion-panel>
+      <p>
+        <mat-checkbox placeholder="Fullscreen" [(ngModel)]="browserOptions.fullPage">Fullscreen</mat-checkbox>
+      </p>
       <p>
         <mat-form-field>
-          <input matInput placeholder="User" [(ngModel)]="options.source.user">
+          <input matInput placeholder="Viewport height" [(ngModel)]="browserOptions.viewport.height">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Pass" [(ngModel)]="options.source.pass">
+          <input matInput placeholder="Viewport width" [(ngModel)]="browserOptions.viewport.width">
         </mat-form-field>
       </p>
-    </mat-expansion-panel>
-    <hr />
-    <mat-form-field>
-      <input matInput placeholder="Target URL" [(ngModel)]="options.target.url">
-    </mat-form-field>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Options
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <p>
-        <mat-form-field>
-          <input matInput placeholder="User" [(ngModel)]="options.target.user">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Pass" [(ngModel)]="options.target.pass">
-        </mat-form-field>
-      </p>
-    </mat-expansion-panel>
-    <p>
-      <mat-checkbox placeholder="Fullscreen" [(ngModel)]="browserOptions.fullPage">Fullscreen</mat-checkbox>
-    </p>
-    <p>
-      <mat-form-field>
-        <input matInput placeholder="Viewport height" [(ngModel)]="browserOptions.viewport.height">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Viewport width" [(ngModel)]="browserOptions.viewport.width">
-      </mat-form-field>
-    </p>
 
-    <mat-form-field>
-      <input  matInput placeholder="Timeout" [(ngModel)]="slowMo">
-    </mat-form-field>
-    <p>
-      <button [disabled]="status == 4" (click)="submit()" mat-raised-button>Generate screens</button>
-    </p>
+      <mat-form-field>
+        <input  matInput placeholder="Timeout" [(ngModel)]="slowMo">
+      </mat-form-field>
+      <p>
+        <button [disabled]="status == 4" (click)="submit()" mat-raised-button>Generate screens</button>
+      </p>
+    </div>
   </div>
-  <div fxFlex="80">
+  <div fxFlex="100%" fxFlex.gt-xs="60%" fxFlex.gt-sm="67%" fxFlex.gt-md="75%" fxFlex.gt-lg="80%">
+    <div class="outer">
       <div class="content" fxLayout="row" fxFlexFill>
-        <div fxFlex="20" class="sec2" >
+        <div fxFlex="100%" fxFlex.gt-xs="40%" fxFlex.gt-sm="33%" fxFlex.gt-md="25%" fxFlex.gt-lg="20%" >
           <div [hidden]="status !== 2 && status !== 4" class="outer">
             <mat-card>
               <mat-card-title>Target</mat-card-title>
@@ -88,7 +91,7 @@
             </mat-card>
           </div>
         </div>
-        <div fxFlex="60" class="sec2" class="outer">
+        <div fxFlex="100%" fxFlex.gt-xs="60%" fxFlex.gt-sm="67%" fxFlex.gt-md="75%" fxFlex.gt-lg="80%">
           <div [hidden]="status !== 2 && status !== 4">
             <mat-card>
               <mat-card-title [hidden]="!result || !result.misMatchPercentage">{{ result.misMatchPercentage }}</mat-card-title>
@@ -97,5 +100,6 @@
           </div>
         </div>
       </div>
+    </div>
   </div>
 </div>

@@ -32,7 +32,7 @@ export class DiffService {
             return resolve(dir);
           })
         }
-        if (stats.isDirectory()) {
+        if (stats && stats.isDirectory()) {
           return resolve(dir);
         }
         reject("Not a directory");

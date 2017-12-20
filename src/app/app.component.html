@@ -5,13 +5,12 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <mat-nav-list>
-      <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" routerLink="/diff"><mat-icon>home</mat-icon> <span>Start Diff</span> </mat-list-item>
-      <mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" routerLink="/history"><mat-icon>history</mat-icon> <span>History</span> </mat-list-item>
+      <mat-list-item (click)="drawer.toggle()" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" routerLink="/diff"><mat-icon>home</mat-icon> <span>Start Diff</span> </mat-list-item>
+      <mat-list-item (click)="drawer.toggle()" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" routerLink="/history"><mat-icon>history</mat-icon> <span>History</span> </mat-list-item>
     </mat-nav-list>
   </mat-drawer>
 
-  <div>
-    <router-outlet></router-outlet>
-  </div>
+  <router-outlet  fxLayoutWrap></router-outlet>
+
 
 </mat-drawer-container>
