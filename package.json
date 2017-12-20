@@ -1,8 +1,12 @@
 {
   "name": "bcwebdiff",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Tool for creating diff of webpages",
-  "homepage": "https://vcs.b-connect.de/erik.seifert/bcwebdiff",
+  "homepage": "https://github.com/b-connect/bcwebdiff",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/b-connect/bcwebdiff"
+  },
   "author": {
     "name": "Erik Seifert",
     "email": "erik.seifert@b-connect.de"
@@ -31,6 +35,7 @@
     "electron:prod": "npm run build:prod && electron ./dist",
     "electron:linux": "npm run build:prod && npx electron-builder build --linux",
     "electron:windows": "npm run build:prod && npx electron-builder build --windows",
+    "publish": "npm run build:prod && npx electron-builder build -p onTagOrDraft --linux",
     "electron:mac": "npm run build:prod && npx electron-builder build --mac",
     "clean": "find ./app-builds -maxdepth 1 -mindepth 1 -type d -exec rm -rf '{}' \\;",
     "test": "karma start ./karma.conf.js",

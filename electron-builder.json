@@ -2,6 +2,7 @@
   "productName": "bcwebdiff",
   "buildVersion": "latest",
   "asar": false,
+  "publish": ["github"],
   "directories": {
     "app": "dist",
     "output": "app-builds"
