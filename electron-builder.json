@@ -10,7 +10,12 @@
   "win": {
     "icon": "dist/assets/icons/favicon",
     "target": [
-      "portable"
+      {
+        "target": "nsis",
+        "arch": [
+          "x64"
+        ]
+      }
     ]
   },
   "mac": {
@@ -26,7 +31,8 @@
     },
     "category": "Development",
     "target": [
-      "AppImage"
+      "AppImage",
+      "deb"
     ]
   }
 }
