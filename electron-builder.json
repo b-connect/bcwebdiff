@@ -8,13 +8,13 @@
     "output": "app-builds"
   },
   "win": {
-    "icon": "dist/favicon",
+    "icon": "dist/assets/icons/favicon",
     "target": [
       "portable"
     ]
   },
   "mac": {
-    "icon": "dist/favicon",
+    "icon": "dist/assets/icons/favicon",
     "target": [
       "dmg"
     ]
@@ -27,9 +27,6 @@
     "category": "Development",
     "target": [
       "AppImage"
-    ],
-    "publish": {
-      "provider": "github"
-    }
+    ]
   }
 }
