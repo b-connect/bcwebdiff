@@ -1,6 +1,6 @@
 {
   "name": "bcwebdiff",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "Tool for creating diff of webpages",
   "homepage": "https://github.com/b-connect/bcwebdiff",
   "repository": {
