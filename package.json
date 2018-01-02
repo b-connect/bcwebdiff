@@ -60,6 +60,7 @@
     "ba64": "^3.0.9",
     "core-js": "^2.5.3",
     "datauri": "^1.0.5",
+    "electron-gh-releases": "^2.0.4",
     "electron-json-storage": "^4.0.2",
     "fs-extra": "^5.0.0",
     "fs-extra-promise": "^1.0.1",
